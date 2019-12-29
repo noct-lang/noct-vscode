@@ -1,0 +1,243 @@
+{
+	"name": "noct",
+	"scopeName": "source.nx",
+	"patterns": 
+	[
+		{
+			"match": "(\\b)(module)(\\s+[\\w.]+\\s*;)",
+			"captures": {
+				"2": {
+					"name": "keyword.other.noct"
+				}
+			}
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#attributes"
+		},
+		{
+			"include": "#special-keywords"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#escape-characters"
+		},
+		{
+			"include": "#literals"
+		}
+	],
+	"repository": 
+	{
+		"keywords": 
+		{
+			"patterns": [
+				{
+					"match": "\\b(if|else|loop|while|do|for|switch)\\b",
+					"name": "keyword.control.noct"
+				},
+				{
+					"match": "\\b(func|import|struct|union|enum|interface|typealias|typedef|impl|macro)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "\\b(asm|defer|stack_defer|in|unsafe)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "\\b(continue|break|return|fallthrough|goto)\\b",
+					"name": "keyword.control.noct"
+				},
+				{
+					"match": "\\b(null|true|false|void)\\b",
+					"name": "constant.language.noct"
+				},
+				{
+					"match": "\\b[sS]elf\\b",
+					"name": "variable.language.noct"
+				},
+				{
+					"match": "\\b(cast|transmute)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "\\b(where)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "\\b(move)\\b",
+					"name": "keyword.other.noct"
+				}
+			]
+		},
+		"types":
+		{
+			"patterns": [
+				{
+					"match": "\\b(([ui](8|size))|([uif](16|32|64|128)))\\b",
+					"name": "storage.type.noct"
+				},
+				{
+					"match": "\\b(char|bool)\\b",
+					"name": "storage.type.noct"
+				}
+			]
+		},
+		"attributes":
+		{
+			"patterns": [
+				{
+					"match": "(\\b)(public)(\\s*\\(\\s*)(module|package|dynlib)(\\s*\\))",
+					"captures":
+					{
+						"2":
+						{
+							"name": "storage.modifier.noct"
+						},
+						"4": 
+						{
+							"name": "storage.modifier.noct"
+						}
+					}
+				},
+				{
+					"match": "\\b(public)\\b",
+					"name": "storage.modifier.noct"
+				},
+				{
+					"match": "\\b(const|cconst|immutable|static)\\b",
+					"name": "storage.modifier.noct"
+				},
+				{
+					"match": "\\b(lazy)\\b",
+					"name": "storage.modifier.noct"
+				},
+				{
+					"match": "(\\b)(weak)(\\s+interface\\s)",
+					"captures":
+					{
+						"2": 
+						{
+							"name": "storage.modifier.noct"
+						},
+						"3":
+						{
+							"name": "keyword.other.noct"
+						}
+					}
+				}
+			]
+		},
+		"special-keywords": {
+			"patterns": [
+				{
+					"match": "\\b__(FILE(_FULL_PATH){0,1}|MODULE|PACKAGE|NAMESPACE|LINE|(PRETTY_){0,1}FUNC|FUNC_NAME)__\\b",
+					"name": "keyword.other.noct"
+				}
+			]
+		},
+		"comments":
+		{
+			"patterns": [
+				{
+					"begin": "//",
+					"end": "(?=\n)",
+					"name": "comment.line.double-quote.noct"
+				},
+				{
+					"include": "#block-comment"
+				}
+			]
+		},
+		"block-comment":
+		{
+			"begin": "/\\*",
+			"end": "\\*/",
+			"patterns": [
+				{
+					"include": "#block-comment"
+				}
+			],
+			"name": "comment.block.noct"
+		},
+		"strings": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"include": "#escape-characters"
+						}
+					],
+					"name": "string.quoted.double.noct"
+				},
+				{
+					"begin": "\"\"\"",
+					"end": "\"\"\"",
+					"name": "string.quoted.double.noct"
+				},
+				{
+					"begin": "\\$\"",
+					"end": "\"",
+					"name": "string.interpolated.noct"
+				}
+			]
+		},
+		"escape-characters":
+		{
+			"patterns": [
+				{
+					"match": "\\\\(?:[\"/bfnrt0]|u[0-9a-fA-F]{0,4})",
+					"name": "constant.character.escape.noct"
+                },
+                {
+					"match": "\\\\o[0-7]{0,3}",
+					"name": "constant.character.escape.noct"
+                },
+                {
+					"match": "\\\\x[0-9a-fA-F]{0,2}",
+					"name": "constant.character.escape.noct"
+                },
+                {
+					"match": "\\\\u[0-9a-fA-F]{0,4}",
+					"name": "constant.character.escape.noct"
+                },
+                {
+					"match": "\\\\U[0-9a-fA-F]{0,8}",
+					"name": "constant.character.escape.noct"
+				}
+			]
+		},
+		"literals":
+		{
+			"patterns": [
+				{
+					"match": "(\\W)(0(x|X)[0-9a-fA-F]([0-9a-fA-F_']*[0-9a-fA-F])?([iuf](8|16|32|64))?)",
+					"captures": {
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W)([0-9]([0-9_']*[0-9])?([iuf](8|16|32|64))?)",
+					"captures": {
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				}
+			]
+		}
+	}
+}

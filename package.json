@@ -1,0 +1,33 @@
+{
+    "name": "noct-lang",
+    "version": "0.0.1",
+    "displayName": "Noct",
+    "engines": {
+        "vscode": "^1.22.0"
+    },
+    "publisher": "Jelte Meganck",
+    "keywords": [
+        "language",
+        "noct"
+    ],
+    "license": "See LICENSE.md",
+    "description": "Support for the noct programming language",
+    "categories": [ "Programming Languages" ],
+    "contributes": {
+        "languages": [{
+            "id": "noct",
+            "aliases": ["noct", "Noct"],
+            "extensions": [
+                ".nx"
+            ],
+            "configuration": "./noct.language-configuration.json"
+        }],
+        "grammars": [
+            {
+                "language": "noct",
+                "scopeName": "source.nx",
+                "path": "./syntaxes/noct.tmLanguage.json"
+            }
+        ]
+    }
+}
