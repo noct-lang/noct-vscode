@@ -140,7 +140,7 @@
 		"special-keywords": {
 			"patterns": [
 				{
-					"match": "\\b__(FILE(_FULL_PATH){0,1}|MODULE|PACKAGE|NAMESPACE|LINE|(PRETTY_){0,1}FUNC|FUNC_NAME)__\\b",
+					"match": "\\b__(FILE(_FULL_PATH){0,1}|(FULL_){0,1}MODULE|PACKAGE|NAMESPACE|LINE|(PRETTY_){0,1}FUNC|FUNC_NAME)__\\b",
 					"name": "keyword.other.noct"
 				}
 			]
