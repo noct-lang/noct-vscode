@@ -30,6 +30,9 @@
 			"include": "#strings"
 		},
 		{
+			"include": "#chars"
+		},
+		{
 			"include": "#escape-characters"
 		},
 		{
@@ -182,14 +185,23 @@
 					"name": "string.quoted.double.noct"
 				},
 				{
-					"begin": "\"\"\"",
-					"end": "\"\"\"",
-					"name": "string.quoted.double.noct"
-				},
-				{
-					"begin": "\\$\"",
+					"begin": "r\"",
 					"end": "\"",
-					"name": "string.interpolated.noct"
+					"name": "string.quoted.double.noct"
+				}
+			]
+		},
+		"chars": {
+			"patterns": [
+				{
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"include": "#escape-characters"
+						}
+					],
+					"name": "string.quoted.double.noct"
 				}
 			]
 		},
@@ -205,7 +217,7 @@
 					"name": "constant.character.escape.noct"
                 },
                 {
-					"match": "\\\\x[0-9a-fA-F]{0,2}",
+					"match": "\\\\[xX][0-9a-fA-F]{0,2}",
 					"name": "constant.character.escape.noct"
                 },
                 {
@@ -222,16 +234,64 @@
 		{
 			"patterns": [
 				{
-					"match": "(\\W)(0(x|X)[0-9a-fA-F]([0-9a-fA-F_']*[0-9a-fA-F])?([iuf](8|16|32|64))?)",
-					"captures": {
+					"match": "(\\W|\\b|\\s|^)(0[xX][0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?([iu](8|16|32|64|128))?)",
+					"captures":	{
 						"2": {
 							"name": "constant.numeric.noct"
 						}
 					}
 				},
 				{
-					"match": "(\\W)([0-9]([0-9_']*[0-9])?([iuf](8|16|32|64))?)",
-					"captures": {
+					"match": "(\\W|\\b|\\s|^)(0[oO][0-6]([0-6_]*[0-6])?([iu](8|16|32|64|128))?)",
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)(0[bB][01]([01_]*[01])?([iu](8|16|32|64|128))?)",
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)(-?[0-9]([0-9_]*[0-9])?(\\.[0-9]([0-9_]*[0-9])?)?[eE]-?[0-9]([0-9_]*[0-9])?(f(16|32|64|128))?)", 
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)(-([0-9]([0-9_]*[0-9])?)?\\.[0-9]([0-9_]*[0-9])?(f(16|32|64|128))?)", 
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)(([0-9]([0-9_]*[0-9])?)?\\.[0-9]([0-9_]*[0-9])?(f(16|32|64|128))?)", 
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)(-[0-9]([0-9_]*[0-9])?(([iu](8|16|32|64|128))|f(16|32|64|128))?)",
+					"captures":	{
+						"2": {
+							"name": "constant.numeric.noct"
+						}
+					}
+				},
+				{
+					"match": "(\\W|\\b|\\s|^)([0-9]([0-9_]*[0-9])?(([iu](8|16|32|64|128))|f(16|32|64|128))?)",
+					"captures":	{
 						"2": {
 							"name": "constant.numeric.noct"
 						}
