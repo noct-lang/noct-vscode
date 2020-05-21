@@ -53,7 +53,15 @@
 					"name": "keyword.other.noct"
 				},
 				{
-					"match": "\\b(asm|defer|stack_defer|in|unsafe)\\b",
+					"match": "\\b(asm|defer|errdefer|in|!in|is|unsafe|try|throw|throws)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "(!in)\\b",
+					"name": "keyword.other.noct"
+				},
+				{
+					"match": "\\b(as!|as\\?)",
 					"name": "keyword.other.noct"
 				},
 				{
@@ -69,7 +77,7 @@
 					"name": "variable.language.noct"
 				},
 				{
-					"match": "\\b(cast|transmute)\\b",
+					"match": "\\b(as|transmute)\\b",
 					"name": "keyword.other.noct"
 				},
 				{
@@ -117,7 +125,7 @@
 					"name": "storage.modifier.noct"
 				},
 				{
-					"match": "\\b(const|cconst|immutable|static)\\b",
+					"match": "\\b(const|comptime|immutable|static)\\b",
 					"name": "storage.modifier.noct"
 				},
 				{
@@ -143,7 +151,7 @@
 		"special-keywords": {
 			"patterns": [
 				{
-					"match": "\\b__(FILE(_FULL_PATH){0,1}|(FULL_){0,1}MODULE|PACKAGE|NAMESPACE|LINE|(PRETTY_){0,1}FUNC|FUNC_NAME)__\\b",
+					"match": "#[a-zA-Z_]\\w*\\b",
 					"name": "keyword.other.noct"
 				}
 			]
@@ -242,7 +250,7 @@
 					}
 				},
 				{
-					"match": "(\\W|\\b|\\s|^)(0[oO][0-6]([0-6_]*[0-6])?([iu](8|16|32|64|128))?)",
+					"match": "(\\W|\\b|\\s|^)(0[oO][0-7]([0-7_]*[0-7])?([iu](8|16|32|64|128))?)",
 					"captures":	{
 						"2": {
 							"name": "constant.numeric.noct"
